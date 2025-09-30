@@ -5,7 +5,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f5e6cc; /* Light brown */
+      background-color: #f5e6cc;
       margin: 0;
       padding: 0;
       display: flex;
@@ -35,7 +35,7 @@
       text-align: left;
     }
 
-    select {
+    select, input[type="text"] {
       width: 100%;
       padding: 8px;
       margin-top: 5px;
@@ -78,13 +78,16 @@
       <option value="524SOS">524 SOS</option>
     </select>
 
-    <label for="serial">Serial</label>
-    <select id="serial" onchange="updateComputerName()">
-      <option value="">--Select Serial--</option>
+    <label for="model">Manufacturer/Model</label>
+    <select id="model">
+      <option value="">--Select Model--</option>
       <option value="Dell">Dell</option>
       <option value="SurfacePro">Microsoft Surface Pro</option>
       <option value="Other">Other</option>
     </select>
+
+    <label for="serial">Serial Number</label>
+    <input type="text" id="serial" placeholder="Enter serial number" oninput="updateComputerName()" />
 
     <div id="computerName"></div>
   </div>
@@ -93,7 +96,7 @@
     function updateComputerName() {
       const type = document.getElementById("computerType").value;
       const squadron = document.getElementById("squadron").value;
-      const serial = document.getElementById("serial").value;
+      const serial = document.getElementById("serial").value.trim();
 
       const output = document.getElementById("computerName");
 
