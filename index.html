@@ -73,8 +73,13 @@
 
       const output = document.getElementById("computerName");
 
+      let prefix = "";
+      if (type === "Workstation") prefix = "CZQZW-";
+      else if (type === "Laptop") prefix = "CZQZL-";
+      else if (type === "Tablet") prefix = "CZQZT-";
+
       if (type && squadron && serial) {
-        output.textContent = `Computer Name: ${squadron}-${type}-${serial}`;
+        output.textContent = `Computer Name: ${prefix}${squadron}-${serial}`;
       } else {
         output.textContent = "";
       }
