@@ -21,13 +21,19 @@
       padding: 5px;
       margin-top: 5px;
     }
+    #computerName {
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #444;
+    }
   </style>
 </head>
 <body>
   <h1>Cannon AFB Naming Convention</h1>
 
   <label for="computerType">Computer Type</label>
-  <select id="computerType">
+  <select id="computerType" onchange="updateComputerName()">
     <option value="">--Select Type--</option>
     <option value="Workstation">Workstation</option>
     <option value="Laptop">Laptop</option>
@@ -35,26 +41,44 @@
   </select>
 
   <label for="squadron">Squadron</label>
-  <select id="squadron">
+  <select id="squadron" onchange="updateComputerName()">
     <option value="">--Select Squadron--</option>
-    <option value="27 SOG">27 SOG</option>
-    <option value="3 SOS">3 SOS</option>
-    <option value="9 SOS">9 SOS</option>
-    <option value="16 SOS">16 SOS</option>
-    <option value="20 SOS">20 SOS</option>
-    <option value="33 SOS">33 SOS</option>
-    <option value="56 IS">56 IS</option>
-    <option value="73 SOS">73 SOS</option>
-    <option value="318 SOS">318 SOS</option>
-    <option value="524 SOS">524 SOS</option>
+    <option value="27SOG">27 SOG</option>
+    <option value="3SOS">3 SOS</option>
+    <option value="9SOS">9 SOS</option>
+    <option value="16SOS">16 SOS</option>
+    <option value="20SOS">20 SOS</option>
+    <option value="33SOS">33 SOS</option>
+    <option value="56IS">56 IS</option>
+    <option value="73SOS">73 SOS</option>
+    <option value="318SOS">318 SOS</option>
+    <option value="524SOS">524 SOS</option>
   </select>
 
   <label for="serial">Serial</label>
-  <select id="serial">
+  <select id="serial" onchange="updateComputerName()">
     <option value="">--Select Serial--</option>
     <option value="Dell">Dell</option>
-    <option value="Microsoft Surface Pro">Microsoft Surface Pro</option>
+    <option value="SurfacePro">Microsoft Surface Pro</option>
     <option value="Other">Other</option>
   </select>
+
+  <div id="computerName"></div>
+
+  <script>
+    function updateComputerName() {
+      const type = document.getElementById("computerType").value;
+      const squadron = document.getElementById("squadron").value;
+      const serial = document.getElementById("serial").value;
+
+      const output = document.getElementById("computerName");
+
+      if (type && squadron && serial) {
+        output.textContent = `Computer Name: ${squadron}-${type}-${serial}`;
+      } else {
+        output.textContent = "";
+      }
+    }
+  </script>
 </body>
 </html>
