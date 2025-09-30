@@ -78,6 +78,9 @@
       <option value="524SOS">524 SOS</option>
     </select>
 
+    <label for="serial">Serial Number</label>
+    <input type="text" id="serial" placeholder="Enter serial number" oninput="updateComputerName()" />
+
     <label for="model">Manufacturer/Model</label>
     <select id="model">
       <option value="">--Select Model--</option>
@@ -85,9 +88,6 @@
       <option value="SurfacePro">Microsoft Surface Pro</option>
       <option value="Other">Other</option>
     </select>
-
-    <label for="serial">Serial Number</label>
-    <input type="text" id="serial" placeholder="Enter serial number" oninput="updateComputerName()" />
 
     <div id="computerName"></div>
   </div>
