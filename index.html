@@ -5,22 +5,44 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 40px;
       background-color: #f5e6cc; /* Light brown */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
+
+    .container {
+      background-color: #fff8e1;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 400px;
+    }
+
     h1 {
       color: #333;
+      margin-bottom: 30px;
     }
+
     label {
       display: block;
       margin-top: 20px;
       font-weight: bold;
+      text-align: left;
     }
+
     select {
-      width: 250px;
-      padding: 5px;
+      width: 100%;
+      padding: 8px;
       margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
+
     #computerName {
       margin-top: 30px;
       font-size: 18px;
@@ -30,40 +52,42 @@
   </style>
 </head>
 <body>
-  <h1>Cannon AFB Naming Convention</h1>
+  <div class="container">
+    <h1>Cannon AFB Naming Convention</h1>
 
-  <label for="computerType">Computer Type</label>
-  <select id="computerType" onchange="updateComputerName()">
-    <option value="">--Select Type--</option>
-    <option value="Workstation">Workstation</option>
-    <option value="Laptop">Laptop</option>
-    <option value="Tablet">Tablet</option>
-  </select>
+    <label for="computerType">Computer Type</label>
+    <select id="computerType" onchange="updateComputerName()">
+      <option value="">--Select Type--</option>
+      <option value="Workstation">Workstation</option>
+      <option value="Laptop">Laptop</option>
+      <option value="Tablet">Tablet</option>
+    </select>
 
-  <label for="squadron">Squadron</label>
-  <select id="squadron" onchange="updateComputerName()">
-    <option value="">--Select Squadron--</option>
-    <option value="27SOG">27 SOG</option>
-    <option value="3SOS">3 SOS</option>
-    <option value="9SOS">9 SOS</option>
-    <option value="16SOS">16 SOS</option>
-    <option value="20SOS">20 SOS</option>
-    <option value="33SOS">33 SOS</option>
-    <option value="56IS">56 IS</option>
-    <option value="73SOS">73 SOS</option>
-    <option value="318SOS">318 SOS</option>
-    <option value="524SOS">524 SOS</option>
-  </select>
+    <label for="squadron">Squadron</label>
+    <select id="squadron" onchange="updateComputerName()">
+      <option value="">--Select Squadron--</option>
+      <option value="27SOG">27 SOG</option>
+      <option value="3SOS">3 SOS</option>
+      <option value="9SOS">9 SOS</option>
+      <option value="16SOS">16 SOS</option>
+      <option value="20SOS">20 SOS</option>
+      <option value="33SOS">33 SOS</option>
+      <option value="56IS">56 IS</option>
+      <option value="73SOS">73 SOS</option>
+      <option value="318SOS">318 SOS</option>
+      <option value="524SOS">524 SOS</option>
+    </select>
 
-  <label for="serial">Serial</label>
-  <select id="serial" onchange="updateComputerName()">
-    <option value="">--Select Serial--</option>
-    <option value="Dell">Dell</option>
-    <option value="SurfacePro">Microsoft Surface Pro</option>
-    <option value="Other">Other</option>
-  </select>
+    <label for="serial">Serial</label>
+    <select id="serial" onchange="updateComputerName()">
+      <option value="">--Select Serial--</option>
+      <option value="Dell">Dell</option>
+      <option value="SurfacePro">Microsoft Surface Pro</option>
+      <option value="Other">Other</option>
+    </select>
 
-  <div id="computerName"></div>
+    <div id="computerName"></div>
+  </div>
 
   <script>
     function updateComputerName() {
