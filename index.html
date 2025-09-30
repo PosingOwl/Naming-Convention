@@ -5,30 +5,36 @@
   <style>
     body { font-family: Arial, sans-serif; margin: 40px; }
     h1 { color: #333; }
-    ul { list-style-type: none; padding: 0; }
-    li { margin-bottom: 10px; }
+    label { display: block; margin-top: 20px; font-weight: bold; }
+    select { width: 200px; padding: 5px; margin-top: 5px; }
   </style>
 </head>
 <body>
   <h1>Cannon AFB Naming Convention</h1>
-  <h2>Computer Type</h2>
-  <ul>
-    <li>Workstation</li>
-    <li>Laptop</li>
-    <li>Tablet</li>
-  </ul>
-  <h2>Squadrons</h2>
-  <ul>
-    <li>27 SOG</li>
-    <li>3 SOS</li>
-    <li>9 SOS</li>
+
+  <label for="computerType">Computer Type</label>
+  <select id="computerType">
+    <option value="">--Select Type--</option>
+    <option value="Workstation">Workstation</option>
+    <option value="Laptop">Laptop</option>
+    <option value="Tablet">Tablet</option>
+  </select>
+
+  <label for="squadron">Squadron</label>
+  <select id="squadron">
+    <option value="">--Select Squadron--</option>
+    <option value="27 SOG">27 SOG</option>
+    <option value="3 SOS">3 SOS</option>
+    <option value="9 SOS">9 SOS</option>
     <!-- Add more as needed -->
-  </ul>
-  <h2>Serial</h2>
-  <ul>
-    <li>Dell</li>
-    <li>Microsoft Surface Pro</li>
-    <li>Other</li>
-  </ul>
+  </select>
+
+  <label for="serial">Serial</label>
+  <select id="serial">
+    <option value="">--Select Serial--</option>
+    <option value="Dell">Dell</option>
+    <option value="Microsoft Surface Pro">Microsoft Surface Pro</option>
+    <option value="Other">Other</option>
+  </select>
 </body>
 </html>
