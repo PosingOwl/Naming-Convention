@@ -101,12 +101,14 @@
       const output = document.getElementById("computerName");
 
       let prefix = "";
-      if (type === "Workstation") prefix = "CZQZW-";
-      else if (type === "Laptop") prefix = "CZQZL-";
-      else if (type === "Tablet") prefix = "CZQZT-";
+      if (type === "Workstation") prefix = "CZQZW";
+      else if (type === "Laptop") prefix = "CZQZL";
+      else if (type === "Tablet") prefix = "CZQZT";
 
-      if (type && squadron && serial) {
-        output.textContent = `Computer Name: ${prefix}${squadron}-${serial}`;
+      const lastSix = serial.slice(-6);
+
+      if (type && squadron && serial.length >= 6) {
+        output.textContent = `Computer Name: ${prefix}${squadron}${lastSix}`;
       } else {
         output.textContent = "";
       }
