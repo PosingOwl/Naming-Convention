@@ -82,7 +82,7 @@
       <strong>Squadron:</strong><br>
       An abbreviated version of the squadron the computer belongs in<br><br>
       <strong>Serial:</strong><br>
-      The remaining spaces are filled with the beginning or end of the serial, based on what side is unique
+      The remaining spaces are filled with the beginning, middle, or end of the serial based on the manufacturer
     </div>
 
     <label for="computerType">Computer Type</label>
@@ -106,28 +106,30 @@
       <option value="17OS">17 SOS</option>
       <option value="20AMU">20 AMU</option>
       <option value="20OS">20 SOS</option>
-      <option value="STS">26 STS</option>
+      <option value="26STS">26 STS</option>
+      <option value="27SOG">27 SOG</option>
+      <option value="310OS">310 SOS</option>
+      <option value="318OS">318 SOS</option>
+      <option value="33OS">33 SOS</option>
+      <option value="43IS">43 IS</option>
+      <option value="56IS">56 SOIS</option>
+      <option value="373TRS">373 TRS</option>
+      <option value="727MX">727 SOAMXS</option>
       <option value="AOS">27 SOAOS</option>
+      <option value="AMXS">27 SOAMXS</option>
       <option value="CES">27 SOCES</option>
       <option value="CONS">27 SOCONS</option>
       <option value="CPTS">27 SOCPTS</option>
       <option value="CS">27 SOCS</option>
       <option value="FSS">27 SOFSS</option>
       <option value="LRS">27 SOLRS</option>
-      <option value="SOG">27 SOG</option>
-      <option value="SOMS">27 SOMS</option>
       <option value="MSG">27 SOMSG</option>
+      <option value="MUNS">27 SOMS</option>
       <option value="MXG">27 SOMXG</option>
-      <option value="SFS">27 SOSFS</option>
       <option value="OSS">27 SOSS</option>
+      <option value="SFS">27 SOSFS</option>
       <option value="SOW">27 SOW</option>
-      <option value="33OS">33 SOS</option>
-      <option value="43IS">43 IS</option>
-      <option value="56IS">56 SOIS</option>
-      <option value="310OS">310 SOS</option>
-      <option value="318OS">318 SOS</option>
-      <option value="TRS">373 TRS</option>
-      <option value="727MX">727 SOAMXS</option>
+      <option value="STS">26 STS</option>
     </select>
 
     <label for="serial">Serial Number</label>
@@ -163,9 +165,20 @@
       const baseName = prefix + squadron;
       const maxLength = 15;
       const remainingLength = maxLength - baseName.length;
-      const serialPart = serial.slice(-remainingLength);
 
-      if (type && squadron && serial.length > 0) {
+      let serialPart = "";
+      if (serial.length > 0) {
+        if (model === "Dell") {
+          serialPart = serial.substring(0, remainingLength);
+        } else if (model === "SurfacePro") {
+          const start = Math.max(0, Math.floor((serial.length - remainingLength) / 2));
+          serialPart = serial.substring(start, start + remainingLength);
+        } else {
+          serialPart = serial.slice(-remainingLength);
+        }
+      }
+
+      if (type && squadron && serial.length > 0 && model) {
         output.textContent = `Computer Name: ${baseName}${serialPart}`;
         error.textContent = "";
       } else {
