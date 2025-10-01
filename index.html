@@ -26,7 +26,17 @@
 
     h1 {
       color: #333;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
+    }
+
+    .info-box {
+      margin-top: 10px;
+      background-color: #fff3e0;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: left;
+      font-size: 14px;
+      color: #333;
     }
 
     label {
@@ -56,35 +66,13 @@
       font-size: 14px;
       margin-top: 10px;
     }
-
-    .info-button {
-      margin-top: 20px;
-      background-color: #ffcc80;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .info-box {
-      display: none;
-      margin-top: 15px;
-      background-color: #fff3e0;
-      padding: 15px;
-      border-radius: 10px;
-      text-align: left;
-      font-size: 14px;
-      color: #333;
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Cannon AFB Naming Convention</h1>
 
-    <button class="info-button" onclick="toggleInfo()">Naming Convention</button>
-    <div class="info-box" id="infoBox">
+    <div class="info-box">
       <strong>Cannon AFB Naming Convention</strong><br><br>
       The name is split up into 4 parts:<br><br>
       <strong>Identifier:</strong><br>
@@ -165,11 +153,6 @@
       } else {
         output.textContent = "";
       }
-    }
-
-    function toggleInfo() {
-      const infoBox = document.getElementById("infoBox");
-      infoBox.style.display = infoBox.style.display === "none" ? "block" : "none";
     }
   </script>
 </body>
