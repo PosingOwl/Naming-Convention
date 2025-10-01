@@ -147,33 +147,30 @@
 
   <script>
     function updateComputerName() {
-      const type = document.getElementById("computerType").value;
-      const squadron = document.getElementById("squadron").value;
-      const serial = document.getElementById("serial").value.trim();
+      const type = document.getElementById("computerType").value.toUpperCase();
+      const squadron = document.getElementById("squadron").value.toUpperCase();
+      const serial = document.getElementById("serial").value.trim().toUpperCase();
       const model = document.getElementById("model").value;
 
       const output = document.getElementById("computerName");
       const error = document.getElementById("errorMsg");
 
       let prefix = "";
-      if (type === "Workstation") prefix = "CZQZW-";
-      else if (type === "Laptop") prefix = "CZQZL-";
-      else if (type === "Tablet") prefix = "CZQZT-";
+      if (type === "WORKSTATION") prefix = "CZQZW-";
+      else if (type === "LAPTOP") prefix = "CZQZL-";
+      else if (type === "TABLET") prefix = "CZQZT-";
 
-      if (serial.length < 6 && serial.length > 0) {
-        error.textContent = "Serial number must be at least 6 characters.";
-        output.textContent = "";
-        return;
-      } else {
+      const baseName = prefix + squadron;
+      const maxLength = 15;
+      const remainingLength = maxLength - baseName.length;
+      const serialPart = serial.slice(-remainingLength);
+
+      if (type && squadron && serial.length > 0) {
+        output.textContent = `Computer Name: ${baseName}${serialPart}`;
         error.textContent = "";
-      }
-
-      const lastSix = serial.slice(-6);
-
-      if (type && squadron && serial.length >= 6) {
-        output.textContent = `Computer Name: ${prefix}${squadron}${lastSix}`;
       } else {
         output.textContent = "";
+        error.textContent = "";
       }
     }
   </script>
