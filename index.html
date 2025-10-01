@@ -11,26 +11,27 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
     }
 
     .container {
       background-color: #fff8e1;
-      padding: 40px;
+      padding: 30px;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
       text-align: center;
-      width: 400px;
+      max-width: 400px;
+      width: 90%;
     }
 
     h1 {
       color: #333;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     label {
       display: block;
-      margin-top: 20px;
+      margin-top: 15px;
       font-weight: bold;
       text-align: left;
     }
@@ -44,10 +45,16 @@
     }
 
     #computerName {
-      margin-top: 30px;
+      margin-top: 25px;
       font-size: 18px;
       font-weight: bold;
       color: #444;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -82,14 +89,15 @@
     <input type="text" id="serial" placeholder="Enter serial number" oninput="updateComputerName()" />
 
     <label for="model">Manufacturer/Model</label>
-    <select id="model">
+    <select id="model" onchange="updateComputerName()">
       <option value="">--Select Model--</option>
       <option value="Dell">Dell</option>
-      <option value="SurfacePro">Microsoft Surface Pro</option>
+      <option value="SurfacePro">SurfacePro</option>
       <option value="Other">Other</option>
     </select>
 
     <div id="computerName"></div>
+    <div id="errorMsg" class="error"></div>
   </div>
 
   <script>
@@ -97,18 +105,28 @@
       const type = document.getElementById("computerType").value;
       const squadron = document.getElementById("squadron").value;
       const serial = document.getElementById("serial").value.trim();
+      const model = document.getElementById("model").value;
 
       const output = document.getElementById("computerName");
+      const error = document.getElementById("errorMsg");
 
       let prefix = "";
       if (type === "Workstation") prefix = "CZQZW-";
       else if (type === "Laptop") prefix = "CZQZL-";
       else if (type === "Tablet") prefix = "CZQZT-";
 
+      if (serial.length < 6 && serial.length > 0) {
+        error.textContent = "Serial number must be at least 6 characters.";
+        output.textContent = "";
+        return;
+      } else {
+        error.textContent = "";
+      }
+
       const lastSix = serial.slice(-6);
 
       if (type && squadron && serial.length >= 6) {
-        output.textContent = `Computer Name: ${prefix}${squadron}${lastSix}`;
+        output.textContent = `Computer Name: ${prefix}${squadron} and ${lastSix}`;
       } else {
         output.textContent = "";
       }
