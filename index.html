@@ -66,6 +66,21 @@
       font-size: 14px;
       margin-top: 10px;
     }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #d4a373;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #bc8a5f;
+    }
   </style>
 </head>
 <body>
@@ -144,17 +159,21 @@
 
     <div id="computerName"></div>
     <div id="errorMsg" class="error"></div>
+
+    <button onclick="resetForm()">Reset</button>
   </div>
 
   <script>
     function updateComputerName() {
       const type = document.getElementById("computerType").value.toUpperCase();
       const squadron = document.getElementById("squadron").value.toUpperCase();
-      const serial = document.getElementById("serial").value.trim().toUpperCase();
+      const serialRaw = document.getElementById("serial").value.trim().toUpperCase();
       const model = document.getElementById("model").value;
 
       const output = document.getElementById("computerName");
       const error = document.getElementById("errorMsg");
+
+      const cleanSerial = serialRaw.replace(/[^A-Z0-9]/g, "");
 
       let prefix = "";
       if (type === "WORKSTATION") prefix = "CZQZW-";
@@ -166,24 +185,39 @@
       const remainingLength = maxLength - baseName.length;
 
       let serialPart = "";
-      if (serial.length > 0) {
+      if (cleanSerial.length > 0) {
         if (model === "Dell") {
-          serialPart = serial.substring(0, remainingLength);
+          serialPart = cleanSerial.substring(0, remainingLength);
         } else if (model === "SurfacePro") {
-          const start = Math.max(0, Math.floor((serial.length - remainingLength) / 2));
-          serialPart = serial.substring(start, start + remainingLength);
+          const start = Math.max(0, Math.floor((cleanSerial.length - remainingLength) / 2));
+          serialPart = cleanSerial.substring(start, start + remainingLength);
         } else {
-          serialPart = serial.slice(-remainingLength);
+          serialPart = cleanSerial.slice(-remainingLength);
         }
       }
 
-      if (type && squadron && serial.length > 0 && model) {
-        output.textContent = `Computer Name: ${baseName}${serialPart}`;
-        error.textContent = "";
-      } else {
+      if (!type || !squadron || !model || cleanSerial.length === 0) {
         output.textContent = "";
+        error.textContent = "Please fill out all fields to generate the computer name.";
+        return;
+      }
+
+      if (serialPart.length < remainingLength) {
+        error.textContent = "Serial number may be too short to complete the name.";
+      } else {
         error.textContent = "";
       }
+
+      output.textContent = `Computer Name: ${baseName}${serialPart}`;
+    }
+
+    function resetForm() {
+      document.getElementById("computerType").value = "";
+      document.getElementById("squadron").value = "";
+      document.getElementById("serial").value = "";
+      document.getElementById("model").value = "";
+      document.getElementById("computerName").textContent = "";
+      document.getElementById("errorMsg").textContent = "";
     }
   </script>
 </body>
